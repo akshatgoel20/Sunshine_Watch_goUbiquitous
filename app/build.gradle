@@ -33,6 +33,9 @@ dependencies {
     compile 'com.android.support:design:24.2.1'
     compile 'com.android.support:recyclerview-v7:24.2.1'
     compile 'com.google.android.apps.muzei:muzei-api:2.0'
-    compile 'com.google.android.gms:play-services-gcm:7.5.0'
-    compile 'com.google.android.gms:play-services-location:7.5.0'
+    compile 'com.google.android.gms:play-services-gcm:9.0.2'
+    compile 'com.google.android.gms:play-services-location:9.0.2'
+    compile 'com.google.android.support:wearable:1.4.0'
+    compile 'com.google.android.gms:play-services-wearable:9.0.2'
+    wearApp project(':wear')
 }
