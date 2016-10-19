@@ -148,12 +148,7 @@ public class MyWatchFace extends CanvasWatchFaceService {
         Paint mMinTempPaint;
         Time mTime;
 
-        private final DataApi.DataListener onDataChangedListener = new DataApi.DataListener() {
-            @Override
-            public void onDataChanged(DataEventBuffer dataEvents) {
 
-            }
-        };
 
         private final ResultCallback<DataItemBuffer> onConnectedResultCallback = new ResultCallback<DataItemBuffer>() {
             @Override
