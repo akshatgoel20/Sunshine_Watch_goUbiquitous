@@ -106,7 +106,7 @@ public class MyWatchFace extends CanvasWatchFaceService {
         }
     }
 
-    private class Engine extends CanvasWatchFaceService.Engine implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+    private class Engine extends CanvasWatchFaceService.Engine implements DataApi.DataListener,GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
 
         private final Rect mPeekCardBounds = new Rect();
@@ -151,14 +151,7 @@ public class MyWatchFace extends CanvasWatchFaceService {
         private final DataApi.DataListener onDataChangedListener = new DataApi.DataListener() {
             @Override
             public void onDataChanged(DataEventBuffer dataEvents) {
-                for (DataEvent event : dataEvents) {
-                    if (event.getType() == DataEvent.TYPE_CHANGED) {
-                        DataItem item = event.getDataItem();
-                        fetchWeather(item);
-                    }
-                }
 
-                dataEvents.release();
             }
         };
 
@@ -172,6 +165,8 @@ public class MyWatchFace extends CanvasWatchFaceService {
                 dataItems.release();
             }
         };
+
+
 
         @Override
         public void onCreate(SurfaceHolder holder) {
@@ -272,7 +267,8 @@ public class MyWatchFace extends CanvasWatchFaceService {
                     ? R.dimen.digital_date_size_round : R.dimen.digital_date_size);
             float tempSize = resources.getDimension(mIsRound
                     ? R.dimen.digital_temp_size_round : R.dimen.digital_temp_size);
-
+            mYOffset = resources.getDimension(isRound
+                    ? R.dimen.digital_y_offset_round : R.dimen.digital_y_offset);
             mDatePaint.setTextSize(dateSize);
             mMaxTempPaint.setTextSize(tempSize);
             mMinTempPaint.setTextSize(tempSize);
@@ -320,14 +316,14 @@ public class MyWatchFace extends CanvasWatchFaceService {
 
             // Drawing weather icon
             if (!mAmbient) {
-                canvas.drawBitmap(mWeatherIcon, mXOffset, nextLine, mWeatherIconPaint);
+                canvas.drawBitmap(mWeatherIcon, mXOffset-5, nextLine, mWeatherIconPaint);
             } else {
-                canvas.drawBitmap(mWeatherIconGrey, mXOffset, nextLine, mWeatherIconPaint);
+                canvas.drawBitmap(mWeatherIconGrey, mXOffset-5, nextLine, mWeatherIconPaint);
             }
 
             // Drawing the Max and Min Temps
             canvas.drawText(mMaxTemp, mXOffset +
-                    75, nextLine + 50, mMaxTempPaint);
+                    85, nextLine + 50, mMaxTempPaint);
             canvas.drawText(mMinTemp, mXOffset +
                     150, nextLine + 50, mMinTempPaint);
         }
@@ -439,7 +435,7 @@ public class MyWatchFace extends CanvasWatchFaceService {
 
         @Override
         public void onConnected(@Nullable Bundle bundle) {
-            Wearable.DataApi.addListener(mGoogleApiClient, onDataChangedListener);
+            Wearable.DataApi.addListener(mGoogleApiClient, Engine.this);
             Wearable.DataApi.getDataItems(mGoogleApiClient).setResultCallback(onConnectedResultCallback);
         }
 
@@ -448,6 +444,8 @@ public class MyWatchFace extends CanvasWatchFaceService {
                 mGoogleApiClient.disconnect();
             }
         }
+
+
 
         @Override
         public void onConnectionSuspended(int i) {
@@ -471,6 +469,22 @@ public class MyWatchFace extends CanvasWatchFaceService {
             ColorMatrixColorFilter filter = new ColorMatrixColorFilter(colorMatrix);
             greyscale.setColorFilter(filter);
             canvas.drawBitmap(mWeatherIcon, 0, 0, greyscale);
+        }
+
+        @Override
+        public void onDataChanged(DataEventBuffer dataEvents) {
+            for (DataEvent event : dataEvents) {
+                if (event.getType() == DataEvent.TYPE_CHANGED) {
+                    DataItem item = event.getDataItem();
+                    fetchWeather(item);
+                }
+            }
+
+            dataEvents.release();
+        }
+
+        public ResultCallback<DataItemBuffer> getOnConnectedResultCallback() {
+            return onConnectedResultCallback;
         }
     }
 }
