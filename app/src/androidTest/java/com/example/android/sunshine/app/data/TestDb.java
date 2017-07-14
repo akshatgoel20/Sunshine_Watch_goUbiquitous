@@ -20,6 +20,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.test.AndroidTestCase;
 
+import com.starksky.android.sunshine.app.data.WeatherContract;
+import com.starksky.android.sunshine.app.data.WeatherDbHelper;
+
 import java.util.HashSet;
 
 public class TestDb extends AndroidTestCase {

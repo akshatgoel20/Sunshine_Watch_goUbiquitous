@@ -19,6 +19,9 @@ import android.content.UriMatcher;
 import android.net.Uri;
 import android.test.AndroidTestCase;
 
+import com.starksky.android.sunshine.app.data.WeatherContract;
+import com.starksky.android.sunshine.app.data.WeatherProvider;
+
 /*
     Uncomment this class when you are ready to test your UriMatcher.  Note that this class utilizes
     constants that are declared with package protection inside of the UriMatcher, which is why

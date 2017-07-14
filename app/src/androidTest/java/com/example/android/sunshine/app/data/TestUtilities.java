@@ -26,6 +26,8 @@ import android.os.HandlerThread;
 import android.test.AndroidTestCase;
 
 import com.example.android.sunshine.app.utils.PollingCheck;
+import com.starksky.android.sunshine.app.data.WeatherContract;
+import com.starksky.android.sunshine.app.data.WeatherDbHelper;
 
 import java.util.Map;
 import java.util.Set;

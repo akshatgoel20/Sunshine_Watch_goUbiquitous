@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.android.sunshine.app">
+    package="com.starksky.android.sunshine.app">
 
     <!-- This permission is necessary in order for Sunshine to perform network access. -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -63,7 +63,7 @@
             android:theme="@style/AppTheme.Details">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.sunshine.app.MainActivity" />
+                android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".SettingsActivity"
@@ -72,7 +72,7 @@
             android:theme="@style/SettingsTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.sunshine.app.MainActivity" />
+                android:value=".MainActivity" />
         </activity>
 
         <provider

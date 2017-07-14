@@ -3,10 +3,10 @@ apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
-        applicationId "com.example.android.sunshine.app"
+        applicationId "com.starksky.android.sunshine.app"
         minSdkVersion 10
         targetSdkVersion 23
         versionCode 1
