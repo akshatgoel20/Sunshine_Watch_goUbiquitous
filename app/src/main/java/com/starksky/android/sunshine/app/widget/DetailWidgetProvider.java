@@ -14,7 +14,7 @@ import android.widget.RemoteViews;
 
 import com.starksky.android.sunshine.app.DetailActivity;
 import com.starksky.android.sunshine.app.MainActivity;
-import com.example.android.sunshine.app.R;
+import com.starksky.android.sunshine.app.R;
 import com.starksky.android.sunshine.app.sync.SunshineSyncAdapter;
 
 /**
